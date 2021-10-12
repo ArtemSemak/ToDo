@@ -75,3 +75,27 @@ body, header {
 .lbltext {
     font-size: 10px;
 }
+
+
+span label input  {
+    display: none;/* <--скрываем дефолтный чекбокс */
+  }
+  label span {/* <-- стилизируем новый */
+    height: 7px;
+    width: 7px;
+    border: 1px solid gray;
+    display: inline-block;
+    position: relative;
+    background-color:#FFF;
+    border-radius:2px;
+    padding:3px;
+    margin-left: 3px;
+  }
+  [type=checkbox]:checked + span:before {
+    content: '\2714';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    font-size: 23px;
+    color:black;
+  }
