@@ -42,7 +42,7 @@ body, header {
 
 .tds {
     margin-top: 30px;
-    width: 528px;
+    width: 560px;
     
 }
 .td {
@@ -76,11 +76,21 @@ body, header {
     font-size: 10px;
 }
 
+.trash {
+    margin-left: 8px;
+}
+
+.footer {
+    display: flex;
+    width: 150px;
+    align-items: center;
+    justify-content: space-between;
+}
 
 span label input  {
     display: none;/* <--скрываем дефолтный чекбокс */
   }
-  label span {/* <-- стилизируем новый */
+  label span {
     height: 7px;
     width: 7px;
     border: 1px solid gray;
