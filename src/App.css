@@ -112,9 +112,7 @@ label span {
   color:black;
 }
 
-.tdtxt {
-  margin-left: 6px;
-}
+
 
 .dund {
   display: flex;
@@ -124,4 +122,12 @@ label span {
 
 .lblar {
   margin-top: 5px;
+}
+
+.done{
+  text-decoration: line-through;
+}
+
+.noTD {
+  text-align: center;
 }
