@@ -1,6 +1,7 @@
 import './App.css';
-import TDCard from './TDCard';
+
 import { useState } from 'react'
+import TDList from './TDlLst'
 
 function App() {
   let id = 4
@@ -9,7 +10,24 @@ function App() {
   let [sortedTodos, setSortedTodos] = useState([])
   const [value, setValue] = useState('')
   
-  
+  function removeTodo(id) {
+    setTodos(todos.filter(todo => todo.id !== id))
+    setSortedTodos(sortedTodos.filter(todo => todo.id !== id))
+  }
+
+
+function doneTodo(id) {
+    setSortedTodos(
+      todos.map( todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed
+        }
+        return todo
+      }
+      )
+    ) 
+    
+  }
   
   
   function sortByDate(flag) {
@@ -42,33 +60,18 @@ function App() {
   }
 
 
-  function doneTodo(id) {
-    setTodos(
-      todos.map( todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo
-      }
-      )
-    ) 
-  }
 
-  function removeTodo(id) {
-    setTodos(todos.filter(todo => todo.id !== id))
-    setSortedTodos(sortedTodos.filter(todo => todo.id !== id))
-  }
 
 
   function addTodo(event) {
     
     event.preventDefault()
-    
+      const id = Date.now()
       if (value.trim()) {
         console.log(value)
         setTodos(todos.concat(
           {
-            id: Date.now(),
+            id: id,
             title: value,
             completed: false,
             date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
@@ -77,7 +80,7 @@ function App() {
         ))
         setSortedTodos(todos.concat(
           {
-            id: Date.now(),
+            id: id,
             title: value,
             completed: false,
             date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
@@ -120,11 +123,7 @@ function App() {
         </section>
     </header>
 
-    <main className="tds">
-      { sortedTodos.length ?  sortedTodos.map( todo => {
-        return <TDCard todo={todo} onChange={doneTodo} deleteTodo={removeTodo}/>
-      }) : <p className="noTD">You dont have ToDos</p>}
-    </main>
+    <TDList sortedTodos={sortedTodos} doneTodo={doneTodo} removeTodo={removeTodo}/>
 
     
 
