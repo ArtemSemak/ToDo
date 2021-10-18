@@ -1,14 +1,20 @@
 import './App.css';
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TDList from './TDlLst'
+import Pagination from './Pagination'
 
 function App() {
-  let id = 4
   const date = new Date()
   const [todos, setTodos] = useState([])
-  let [sortedTodos, setSortedTodos] = useState([])
+  const [sortedTodos, setSortedTodos] = useState([])
   const [value, setValue] = useState('')
+  const [currentPage, setCurrentPage] = useState()
+  const todosPerPage = 5
+  const [sortedCount, setSortedCount] = useState(0)
+  const [doneUnDone, setDoneUnDone] = useState('all')
+  
+  
   
   function removeTodo(id) {
     setTodos(todos.filter(todo => todo.id !== id))
@@ -17,7 +23,7 @@ function App() {
 
 
 function doneTodo(id) {
-    setSortedTodos(
+    setTodos(
       todos.map( todo => {
         if (todo.id === id) {
           todo.completed = !todo.completed
@@ -50,10 +56,18 @@ function doneTodo(id) {
   function sortByComplete(flag) {
     
     if (flag === 'all') {
+      setSortedCount(todos.length)
       setSortedTodos(todos)
+      setDoneUnDone('all')
     }
-    else {
-      setSortedTodos(todos.filter(it => it.completed === flag))
+    else if (flag == 'done'){
+      setSortedCount(todos.filter(it => it.completed === true).length)
+      setSortedTodos(todos.filter(it => it.completed === true))
+      setDoneUnDone('done')
+    } else {
+      setSortedCount(todos.filter(it => it.completed === false).length)
+      setSortedTodos(todos.filter(it => it.completed === false))
+      setDoneUnDone('undone')
     }
 
 
@@ -67,6 +81,7 @@ function doneTodo(id) {
     
     event.preventDefault()
       const id = Date.now()
+      setSortedCount(sortedCount + 1)
       if (value.trim()) {
         console.log(value)
         setTodos(todos.concat(
@@ -89,10 +104,39 @@ function doneTodo(id) {
         ))
         
         setValue(' ')
+        setSortedCount(sortedCount + 1)
       }
     }
+    
+    function hanlePageClick(data) { 
+      setCurrentPage(data.selected)
+    }
 
-  
+    useEffect(() => {
+      if (doneUnDone === 'all') {
+        setSortedTodos(todos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
+        console.log(sortedTodos)
+      } else if (doneUnDone == 'done'){
+        console.log(sortedTodos)
+        
+        
+        console.log(sortedTodos)
+        console.log(todos)
+        setSortedTodos(todos.filter(it => it.completed === true))
+        console.log(todos)
+        console.log(sortedTodos)
+        setSortedTodos(sortedTodos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
+        console.log(currentPage)
+        
+        
+      } else {
+        setSortedTodos(todos.filter(it => it.completed === false))
+        setSortedTodos(sortedTodos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
+      }
+      
+    }, [currentPage])
+
+    
 
   return (
     <div className="App">
@@ -110,8 +154,8 @@ function doneTodo(id) {
         <section className="control">
             <section className="dund">
                 <input type="button" onClick={() => sortByComplete('all')} value="All" title="Show all plans"/>
-                <input type="button" onClick={() => sortByComplete(true)} value="Done" title="Show completed plans"/>
-                <input type="button" onClick={() => sortByComplete(false)} value="Undone" className="btnU" title="Show uncompleted plans"/>
+                <input type="button" onClick={() => sortByComplete('done')} value="Done" title="Show completed plans"/>
+                <input type="button" onClick={() => sortByComplete('undone')} value="Undone" className="btnU" title="Show uncompleted plans"/>
             </section>
             <section className="dund">
                 <span className="lblar"> Sort by date </span>
@@ -123,18 +167,14 @@ function doneTodo(id) {
         </section>
     </header>
 
-    <TDList sortedTodos={sortedTodos} doneTodo={doneTodo} removeTodo={removeTodo}/>
+    <TDList sortedTodos={sortedTodos} doneTodo={doneTodo} removeTodo={removeTodo} flag={doneUnDone}/>
 
     
 
-    <footer className="footer">
-      
-        <input className="btnD arrows" type="image" src="left.png" title="Previous page"/>
-        <input type="button" value="1"/>
-        <input type="button" value="2"/>
-        <input type="button" value="3"/>
-        <input className="btnD arrows" type="image" src="right.png" title="Next page"/>
-      
+    <footer>
+    
+      <Pagination todosLength={sortedCount} todosPerPage={todosPerPage} pageClick={hanlePageClick}/>  
+    
     </footer>
     </body>
     </div>

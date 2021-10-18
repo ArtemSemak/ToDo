@@ -7,7 +7,9 @@
   font-weight: normal; 
   } 
 
-
+  *, ::after, ::before {
+    box-sizing: content-box;
+}
 
 * {
   font-family: Serreria Sobria;
@@ -69,7 +71,7 @@ body, header {
 }
 
 .btnAdd {
-  height: 36px;
+  height: 30px;
 }
 
 .lbltext {
@@ -83,16 +85,17 @@ body, header {
 
 .footer {
   display: flex;
-  width: 150px;
+  width: 400px;
   align-items: center;
   justify-content: space-between;
   margin-right: 0;
+  padding-left: 0;
 }
 
 span label input  {
   display: none;/* <--скрываем дефолтный чекбокс */
 }
-label span {
+label span.test {
   height: 7px;
   width: 7px;
   border: 1px solid gray;
@@ -131,3 +134,28 @@ label span {
 .noTD {
   text-align: center;
 }
+
+.page-item {
+  color:black
+}
+
+.page-link {
+  border-color:black;
+  color:black
+}
+
+.page-link:hover {
+  border-color:black;
+  color:black
+}
+
+.page-link:focus {
+  border-color:black;
+  color:black;
+  border-color:black;
+  outline: 0;
+  
+  box-shadow: inset 0 1px 1px black,0 0 8px black;
+}
+
+

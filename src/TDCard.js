@@ -11,8 +11,8 @@ function TDCard({ todo, onChange, deleteTodo }) {
         <section>
             <span><label className="hide">
                 <input type='checkbox' onChange={ () => onChange(todo.id) } checked={ todo.completed }/>
-                <span></span>
-                <label className={ classes.join(' ') }> { todo.title } </label>
+                <span className="test"></span>
+                <span className={ classes.join(' ') }> { todo.title } </span>
               </label> </span>
         </section>
         <section>
