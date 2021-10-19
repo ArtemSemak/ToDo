@@ -55,6 +55,7 @@ body, header {
   border-width: 2px;
   margin-bottom: 10px;
   padding-top: 3px;
+  height: 35px;
 }
 
 .btnD {
@@ -85,11 +86,20 @@ body, header {
 
 .footer {
   display: flex;
-  width: 400px;
   align-items: center;
   justify-content: space-between;
   margin-right: 0;
   padding-left: 0;
+}
+
+.footer-item {
+  margin: 0 5px;
+  display: inline-block;
+  width: 15px;
+}
+
+.arrows {
+  margin: 0 5px;
 }
 
 span label input  {
@@ -159,3 +169,21 @@ label span.test {
 }
 
 
+.qwe {
+  border: 0;
+  background-color: white;
+}
+
+.input-for-edit {
+  display: inline;
+  margin-left: 5px;
+  width: 15px;
+}
+
+/* .titleToDo {
+  display: inline-block;
+  overflow-x:hidden;
+  width: 420px;
+  overflow-x:hidden;
+  text-align: left;
+} */

@@ -1,19 +1,17 @@
 import './App.css';
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import TDList from './TDlLst'
 import Pagination from './Pagination'
+import InputToDo from './InputToDo'
 
 function App() {
   const date = new Date()
   const [todos, setTodos] = useState([])
   const [sortedTodos, setSortedTodos] = useState([])
-  const [value, setValue] = useState('')
-  const [currentPage, setCurrentPage] = useState()
+  const [currentPage, setCurrentPage] = useState(1)
   const todosPerPage = 5
-  const [sortedCount, setSortedCount] = useState(0)
-  const [doneUnDone, setDoneUnDone] = useState('all')
-  
+  const todosForCurrentPage = sortedTodos.slice(currentPage * todosPerPage - 5, currentPage * todosPerPage )
   
   
   function removeTodo(id) {
@@ -24,7 +22,7 @@ function App() {
 
 function doneTodo(id) {
     setTodos(
-      todos.map( todo => {
+      sortedTodos.map( todo => {
         if (todo.id === id) {
           todo.completed = !todo.completed
         }
@@ -35,6 +33,14 @@ function doneTodo(id) {
     
   }
   
+  function editToDo(id, newTitle) {
+    setTodos(
+      todosForCurrentPage.map( todo =>{
+        if (todo.id === id) {
+          todo.title = newTitle
+        } return todo}
+    )
+    )}
   
   function sortByDate(flag) {
     if (flag === 'up') {
@@ -56,32 +62,34 @@ function doneTodo(id) {
   function sortByComplete(flag) {
     
     if (flag === 'all') {
-      setSortedCount(todos.length)
       setSortedTodos(todos)
-      setDoneUnDone('all')
     }
-    else if (flag == 'done'){
-      setSortedCount(todos.filter(it => it.completed === true).length)
+    else if (flag === 'done'){
+      
       setSortedTodos(todos.filter(it => it.completed === true))
-      setDoneUnDone('done')
     } else {
-      setSortedCount(todos.filter(it => it.completed === false).length)
       setSortedTodos(todos.filter(it => it.completed === false))
-      setDoneUnDone('undone')
     }
 
 
   }
 
+  function nextPage() {
+    if (currentPage != Math.ceil(sortedTodos.length / todosPerPage)) setCurrentPage(currentPage + 1)
+      
+  }
 
-
-
-
-  function addTodo(event) {
+  function prevPage() {
+    if (currentPage != 1) setCurrentPage(currentPage - 1)
     
-    event.preventDefault()
+  }
+
+
+
+  function addTodo(value) {
+    
+     
       const id = Date.now()
-      setSortedCount(sortedCount + 1)
       if (value.trim()) {
         console.log(value)
         setTodos(todos.concat(
@@ -103,38 +111,15 @@ function doneTodo(id) {
           }
         ))
         
-        setValue(' ')
-        setSortedCount(sortedCount + 1)
+        
       }
     }
     
-    function hanlePageClick(data) { 
-      setCurrentPage(data.selected)
+    function hanlePageClick(number) { 
+      setCurrentPage(number)
     }
 
-    useEffect(() => {
-      if (doneUnDone === 'all') {
-        setSortedTodos(todos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
-        console.log(sortedTodos)
-      } else if (doneUnDone == 'done'){
-        console.log(sortedTodos)
-        
-        
-        console.log(sortedTodos)
-        console.log(todos)
-        setSortedTodos(todos.filter(it => it.completed === true))
-        console.log(todos)
-        console.log(sortedTodos)
-        setSortedTodos(sortedTodos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
-        console.log(currentPage)
-        
-        
-      } else {
-        setSortedTodos(todos.filter(it => it.completed === false))
-        setSortedTodos(sortedTodos.slice(currentPage * todosPerPage, currentPage * todosPerPage + 5 ))
-      }
-      
-    }, [currentPage])
+    
 
     
 
@@ -145,12 +130,7 @@ function doneTodo(id) {
         <section>
             <p className="title">ToDo</p>
         </section>
-        <section>
-          <form onSubmit={addTodo}>
-            <input type="text" value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." className="inpTD" title="Write your plan here"/>
-            <button type="submit"  className="btnAdd" title="Add your plan">Add</button>
-          </form> 
-        </section>
+          <InputToDo addTodo={addTodo}/>
         <section className="control">
             <section className="dund">
                 <input type="button" onClick={() => sortByComplete('all')} value="All" title="Show all plans"/>
@@ -167,13 +147,13 @@ function doneTodo(id) {
         </section>
     </header>
 
-    <TDList sortedTodos={sortedTodos} doneTodo={doneTodo} removeTodo={removeTodo} flag={doneUnDone}/>
+    <TDList edit={editToDo} sortedTodos={todosForCurrentPage} doneTodo={doneTodo} removeTodo={removeTodo}/>
 
     
 
     <footer>
     
-      <Pagination todosLength={sortedCount} todosPerPage={todosPerPage} pageClick={hanlePageClick}/>  
+      <Pagination todosLength={sortedTodos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} nextPage={nextPage} prevPage={prevPage}/>  
     
     </footer>
     </body>

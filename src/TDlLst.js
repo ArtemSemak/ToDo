@@ -2,11 +2,13 @@ import './App.css';
 import TDCard from './TDCard';
 
 
-function TDList({ sortedTodos, doneTodo, removeTodo, flag}) {
+function TDList({ sortedTodos, doneTodo, removeTodo, edit}) {
+    
+
     return (
         <main className="tds">
-            { sortedTodos.length ?  sortedTodos.slice(0, 5).map( todo => {
-            return <TDCard todo={todo} onChange={doneTodo} deleteTodo={removeTodo}/>
+            { sortedTodos.length ?  sortedTodos.map( todo => {
+            return <TDCard editing={edit} todo={todo} onChange={doneTodo} deleteTodo={removeTodo}/>
             }) : <p className="noTD">You dont have ToDos</p>}
         </main>
     )
