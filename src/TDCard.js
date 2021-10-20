@@ -22,10 +22,12 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
                </span>
                {edit ? <form className='input-for-edit' onSubmit={event => {
                  event.preventDefault()
-                 editing(todo.id, value)
-                 setEdit(false)
-               }}><input onKeyDown={ (e) => {
-                 if (e.keyCode === 27) {
+                 if (value.trim()) {
+                  editing(todo.id, value)
+                  setEdit(false)
+                 }
+               }}><input autoFocus onKeyDown={ (e) => {
+                 if (e.key === 'Escape') {
                    setEdit(false)
                  }
                }} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.title } </span></button>}

@@ -12,7 +12,7 @@ function InputToDo({ addTodo }) {
         addTodo(value)
         setValue('')
       }}>
-            <input type="text" value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." className="inpTD" title="Write your plan here"/>
+            <input autoFocus type="text" value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." className="inpTD" title="Write your plan here"/>
             <button type="submit"  className="btnAdd" title="Add your plan">Add</button>
           </form> 
         </section>

@@ -47,6 +47,8 @@ body, header {
   width: 560px;
   
 }
+
+
 .td {
   display: flex;
   justify-content: space-between;
@@ -65,6 +67,11 @@ body, header {
 
 .btnD:active {
   background-color: rgb(175, 174, 174);
+}
+
+.active {
+  background-color: #f1f1f1;
+  
 }
 
 .date {
