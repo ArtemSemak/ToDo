@@ -27,7 +27,7 @@ function App() {
 
 function doneTodo(id) {
     setTodos(
-      sortedTodos.map( todo => {
+      todosForCurrentPage.map( todo => {
         if (todo.id === id) {
           todo.completed = !todo.completed
         }

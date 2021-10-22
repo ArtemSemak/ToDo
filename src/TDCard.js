@@ -34,8 +34,10 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
                 <span className="test"></span>
               </label>
                </span>
-               {edit ? <form className='input-for-edit' onSubmit={event => submitHandler(event)
-               } ><input autoFocus onKeyDown={ (event) => escHandler(event)} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : 
+               {edit ? <form className='input-for-edit' onBlur={() => {
+                console.log(123) 
+                setEdit(false)}} onSubmit={event => submitHandler(event)
+               } ><input autoFocus  onKeyDown={ (event) => escHandler(event)} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : 
                <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.title } </span></button>}
         </section>
         <section>
