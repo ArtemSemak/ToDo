@@ -13,19 +13,7 @@ function App() {
   const [doneUnDone, setDoneUnDone] = useState('all')
   const todosPerPage = 5
   const todosForCurrentPage = sortedTodos.slice(currentPage * todosPerPage - 5, currentPage * todosPerPage )
-  const all = []
-  const done = []
-  const unDone = []
-  const test = 0
 
-  if (doneUnDone === 'all') {
-    all.push('active')
-  } else if (doneUnDone === 'done') {
-    done.push('active')
-  } else {
-    unDone.push('active')
-  }
-  
   
   function removeTodo(id) {
     setTodos(todos.filter(todo => todo.id !== id))
@@ -138,9 +126,6 @@ function doneTodo(id) {
       setCurrentPage(number)
     }
 
-    
-
-    
 
   return (
     <div className="App">
@@ -152,9 +137,12 @@ function doneTodo(id) {
           <InputToDo addTodo={addTodo}/>
         <section className="control">
             <section className="dund">
-                <input type="button" onClick={() => sortByComplete('all')} value="All" className={all.join(' ')} title="Show all plans"/>
-                <input type="button" onClick={() => sortByComplete('done')} value="Done" className={done.join(' ')} title="Show completed plans"/>
-                <input type="button" onClick={() => sortByComplete('undone')} value="Undone" className={unDone.join(' ')} title="Show uncompleted plans"/>
+                {doneUnDone === 'all' ? <input type="button" onClick={() => sortByComplete('all')} value="All" className='active' title="Show all plans"/> : 
+                <input type="button" onClick={() => sortByComplete('all')} value="All"  title="Show all plans"/>} 
+                {doneUnDone === 'done' ? <input type="button" onClick={() => sortByComplete('done')} value="Done" className='active' title="Show completed plans"/> : 
+                <input type="button" onClick={() => sortByComplete('done')} value="Done"  title="Show completed plans"/>}
+                {doneUnDone === 'undone' ? <input type="button" onClick={() => sortByComplete('undone')} value="Undone" className='active' title="Show uncompleted plans"/> : 
+                <input type="button" onClick={() => sortByComplete('undone')} value="Undone"  title="Show uncompleted plans"/>}
             </section>
             <section className="dund">
                 <span className="lblar"> Sort by date </span>

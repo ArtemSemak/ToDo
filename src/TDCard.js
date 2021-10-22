@@ -12,6 +12,20 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
   function clickHandler() {
     setEdit(true)
   }
+
+  function submitHandler(event) {
+    event.preventDefault()
+    if (value.trim()) {
+      editing(todo.id, value)
+      setEdit(false)
+  }
+  }
+
+  function escHandler(event) {
+    if (event.key === 'Escape') {
+      setEdit(false)
+    }
+  }
     return (
         <section className="td">
         <section >
@@ -20,17 +34,9 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
                 <span className="test"></span>
               </label>
                </span>
-               {edit ? <form className='input-for-edit' onSubmit={event => {
-                 event.preventDefault()
-                 if (value.trim()) {
-                  editing(todo.id, value)
-                  setEdit(false)
-                 }
-               }}><input autoFocus onKeyDown={ (e) => {
-                 if (e.key === 'Escape') {
-                   setEdit(false)
-                 }
-               }} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.title } </span></button>}
+               {edit ? <form className='input-for-edit' onSubmit={event => submitHandler(event)
+               } ><input autoFocus onKeyDown={ (event) => escHandler(event)} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : 
+               <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.title } </span></button>}
         </section>
         <section>
           <label className="lbltext"> { todo.date } </label>
@@ -41,5 +47,6 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
     </section>
     )
 }
+
 
 export default TDCard
