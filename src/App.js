@@ -16,6 +16,7 @@ function App() {
   const all = []
   const done = []
   const unDone = []
+  const test = 0
 
   if (doneUnDone === 'all') {
     all.push('active')
