@@ -5,7 +5,7 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
   const [edit, setEdit] = useState(false)
   const [value, setValue] = useState('')
   const classes = ['titleToDo']
-  if (todo.completed) {
+  if (todo.done) {
     classes.push('done')
   }
 
@@ -16,7 +16,7 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
   function submitHandler(event) {
     event.preventDefault()
     if (value.trim()) {
-      editing(todo.id, value)
+      editing(todo.uuid, value, todo.done)
       setEdit(false)
   }
   }
@@ -30,7 +30,7 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
         <section className="td">
         <section >
             <span><label>
-                <input  type='checkbox' onChange={ () => onChange(todo.id) } checked={ todo.completed }/>
+                <input  type='checkbox' onChange={ () => onChange(todo.uuid, todo.done, todo.name) } checked={ todo.done }/>
                 <span className="test"></span>
               </label>
                </span>
@@ -38,12 +38,12 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
                 console.log(123) 
                 setEdit(false)}} onSubmit={event => submitHandler(event)
                } ><input autoFocus  onKeyDown={ (event) => escHandler(event)} value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /></form> : 
-               <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.title } </span></button>}
+               <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.name } </span></button>}
         </section>
         <section>
-          <label className="lbltext"> { todo.date } </label>
+          <label className="lbltext"> { todo.createdAt.slice(0, 10) } </label>
           <input type="image" className="btnD trash" src="premium-icon-trash-can-4914888.png" title="Delete plan" onClick={ () => {
-            deleteTodo(todo.id)
+            deleteTodo(todo.uuid)
             setEdit(false)} }/>
       </section>
     </section>

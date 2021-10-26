@@ -1,80 +1,101 @@
 import './App.css';
-
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import TDList from './TDlLst'
 import Pagination from './Pagination'
 import InputToDo from './InputToDo'
 
 function App() {
-  const date = new Date()
   const [todos, setTodos] = useState([])
-  const [sortedTodos, setSortedTodos] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [doneUnDone, setDoneUnDone] = useState('all')
   const todosPerPage = 5
-  const todosForCurrentPage = sortedTodos.slice(currentPage * todosPerPage - 5, currentPage * todosPerPage )
+  const todosForCurrentPage = todos.slice(currentPage * todosPerPage - todosPerPage, currentPage * todosPerPage )
 
   
-  function removeTodo(id) {
-    setTodos(todos.filter(todo => todo.id !== id))
-    setSortedTodos(sortedTodos.filter(todo => todo.id !== id))
-    console.log(todosForCurrentPage)
+  async function removeTodo(id) {
+    setTodos(todos.filter(todo => todo.uuid !== id))
+    await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`)
     if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
       setCurrentPage(currentPage - 1)
     }
   }
 
 
-function doneTodo(id) {
-    setTodos(
-      todosForCurrentPage.map( todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
+async function doneTodo(id, completed, title) {
+  await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+      name: title,
+      done: !completed
+      })
+      setTodos(
+        todos.map( todo => {
+          if (todo.uuid === id) {
+            todo.done = !todo.done
+          }
+          return todo
         }
-        return todo
-      }
+        )
       )
-    ) 
+    
     
   }
   
-  function editToDo(id, newTitle) {
+  async function editToDo(id, newTitle, completed) {
+    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+      name: newTitle,
+      done: completed
+      })
     setTodos(
-      todosForCurrentPage.map( todo =>{
-        if (todo.id === id) {
-          todo.title = newTitle
+      todos.map( todo =>{
+        if (todo.uuid === id) {
+          todo.name = newTitle
         } return todo}
     )
     )}
   
-  function sortByDate(flag) {
+  async function sortByDate(flag) {
     if (flag === 'up') {
-     
-      const list = sortedTodos.sort((a, b) => b.id - a.id)
-      let newList = []
-      Object.assign(newList, list)
-      setSortedTodos(newList)
+      if (doneUnDone === 'all') {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=asc")
+        setTodos(data.data)
+      }
+      else if (doneUnDone === 'done'){
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=asc")
+        setTodos(data.data)
+      } else {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=asc")
+        setTodos(data.data)
+      }
     } else { 
-      const list = sortedTodos.sort((a, b) => a.id - b.id)
-      let newList = []
-      Object.assign(newList, list)
-      setSortedTodos(newList)
+      if (doneUnDone === 'all') {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+        setTodos(data.data)
+      }
+      else if (doneUnDone === 'done'){
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
+        setTodos(data.data)
+      } else {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+        setTodos(data.data)
+      }
     }
 
 
   }
 
-  function sortByComplete(flag) {
+  async function sortByComplete(flag) {
     setCurrentPage(1)
     if (flag === 'all') {
-      setSortedTodos(todos)
+      getTodos()
       setDoneUnDone('all')
     }
     else if (flag === 'done'){
+      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
       setDoneUnDone('done')
-      setSortedTodos(todos.filter(it => it.completed === true))
+      setTodos(data.data)
     } else {
-      setSortedTodos(todos.filter(it => it.completed === false))
+      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+      setTodos(data.data)
       setDoneUnDone('undone')
     }
 
@@ -82,7 +103,7 @@ function doneTodo(id) {
   }
 
   function nextPage() {
-    if (currentPage != Math.ceil(sortedTodos.length / todosPerPage)) setCurrentPage(currentPage + 1)
+    if (currentPage != Math.ceil(todos.length / todosPerPage)) setCurrentPage(currentPage + 1)
       
   }
 
@@ -93,39 +114,27 @@ function doneTodo(id) {
 
 
 
-  function addTodo(value) {
+  async function addTodo(value) {
     
       setDoneUnDone('all')
-      const id = Date.now()
-      if (value.trim()) {
-        console.log(value)
-        setTodos(todos.concat(
-          {
-            id: id,
-            title: value,
-            completed: false,
-            date: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
-    
-          }
-        ))
-        setSortedTodos(todos.concat(
-          {
-            id: id,
-            title: value,
-            completed: false,
-            date: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
-    
-          }
-        ))
-        
-        
-      }
+      await axios.post("https://todo-api-learning.herokuapp.com/v1/task/4", {
+        name: value,
+        done: false
+    })
+      getTodos()
     }
     
     function hanlePageClick(number) { 
       setCurrentPage(number)
     }
 
+    async function getTodos() {
+      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+      setTodos(data.data)
+      
+    }
+
+    useEffect(() => {getTodos()}, [])
 
   return (
     <div className="App">
@@ -146,9 +155,9 @@ function doneTodo(id) {
             </section>
             <section className="dund">
                 <span className="lblar"> Sort by date </span>
-                    <input className="btnD" onClick={() => sortByDate('up')} type="image" src="premium-icon-up-arrow-3987238.png" title="New first"/>
+                    <input className="btnD" onClick={() => sortByDate('up')} type="image" src="images/premium-icon-up-arrow-3987238.png" title="New first"/>
                 
-                    <input className="btnD" onClick={() => sortByDate('down')} type="image" src="reverse.png" title="Old first"/>
+                    <input className="btnD" onClick={() => sortByDate('down')} type="image" src="images/reverse.png" title="Old first"/>
                 
             </section>
         </section>
@@ -160,7 +169,7 @@ function doneTodo(id) {
 
     <footer>
     
-      <Pagination currentPage={currentPage} todosLength={sortedTodos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} nextPage={nextPage} prevPage={prevPage}/>  
+      <Pagination currentPage={currentPage} todosLength={todos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} nextPage={nextPage} prevPage={prevPage}/>  
     
     </footer>
     </body>
