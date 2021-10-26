@@ -1,12 +1,13 @@
-import axios from 'axios'
+const axios = require('axios')
 
 
 async function test() {
-   const data = await axios.post("https://todo-api-learning.herokuapp.com/v1/task/4", {
-       test: 1,
-       test1: 2
-   })
-   console.log(data)
+   try {
+      const data = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc') 
+      console.log(data.data)
+   } catch(err) {
+   console.log(err.response.status, err.response.data.message)
+   }
 }
 
 test()

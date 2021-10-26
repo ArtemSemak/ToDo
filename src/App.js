@@ -14,90 +14,105 @@ function App() {
 
   
   async function removeTodo(id) {
-    setTodos(todos.filter(todo => todo.uuid !== id))
-    await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`)
-    if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
-      setCurrentPage(currentPage - 1)
-    }
+    try {
+      setTodos(todos.filter(todo => todo.uuid !== id))
+      await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`)
+      if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
+        setCurrentPage(currentPage - 1)
+      }} catch(err) {
+        alert(err.response.data.message)
+        }
   }
 
 
 async function doneTodo(id, completed, title) {
-  await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
-      name: title,
-      done: !completed
-      })
-      setTodos(
-        todos.map( todo => {
-          if (todo.uuid === id) {
-            todo.done = !todo.done
+  try {
+    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+        name: title,
+        done: !completed
+        })
+        setTodos(
+          todos.map( todo => {
+            if (todo.uuid === id) {
+              todo.done = !todo.done
+            }
+            return todo
           }
-          return todo
-        }
-        )
-      )
+          )
+        ) } catch(err) {
+          alert(err.response.data.message)
+          }
     
     
   }
   
   async function editToDo(id, newTitle, completed) {
-    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
-      name: newTitle,
-      done: completed
-      })
-    setTodos(
-      todos.map( todo =>{
-        if (todo.uuid === id) {
-          todo.name = newTitle
-        } return todo}
-    )
-    )}
+    try {
+      await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+        name: newTitle,
+        done: completed
+        })
+      setTodos(
+        todos.map( todo =>{
+          if (todo.uuid === id) {
+            todo.name = newTitle
+          } return todo}
+      ))} catch(err) {
+        alert(err.response.data.message)
+        }
+    }
   
   async function sortByDate(flag) {
-    if (flag === 'up') {
-      if (doneUnDone === 'all') {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=asc")
-        setTodos(data.data)
-      }
-      else if (doneUnDone === 'done'){
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=asc")
-        setTodos(data.data)
-      } else {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=asc")
-        setTodos(data.data)
-      }
-    } else { 
-      if (doneUnDone === 'all') {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
-        setTodos(data.data)
-      }
-      else if (doneUnDone === 'done'){
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
-        setTodos(data.data)
-      } else {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
-        setTodos(data.data)
-      }
-    }
+    try {
+      if (flag === 'up') {
+        if (doneUnDone === 'all') {
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=asc")
+          setTodos(data.data)
+        }
+        else if (doneUnDone === 'done'){
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=asc")
+          setTodos(data.data)
+        } else {
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=asc")
+          setTodos(data.data)
+        }
+      } else { 
+        if (doneUnDone === 'all') {
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+          setTodos(data.data)
+        }
+        else if (doneUnDone === 'done'){
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
+          setTodos(data.data)
+        } else {
+          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+          setTodos(data.data)
+        }
+      } } catch(err) {
+        alert(err.response.data.message)
+        }
 
 
   }
 
   async function sortByComplete(flag) {
-    setCurrentPage(1)
-    if (flag === 'all') {
-      getTodos()
-      setDoneUnDone('all')
-    }
-    else if (flag === 'done'){
-      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
-      setDoneUnDone('done')
-      setTodos(data.data)
-    } else {
-      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
-      setTodos(data.data)
-      setDoneUnDone('undone')
-    }
+    try {
+      setCurrentPage(1)
+      if (flag === 'all') {
+        getTodos()
+        setDoneUnDone('all')
+      }
+      else if (flag === 'done'){
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
+        setDoneUnDone('done')
+        setTodos(data.data)
+      } else {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+        setTodos(data.data)
+        setDoneUnDone('undone')
+      } } catch(err) {
+        alert(err.response.data.message)
+        }
 
 
   }
@@ -115,13 +130,16 @@ async function doneTodo(id, completed, title) {
 
 
   async function addTodo(value) {
-    
-      setDoneUnDone('all')
-      await axios.post("https://todo-api-learning.herokuapp.com/v1/task/4", {
-        name: value,
-        done: false
-    })
-      getTodos()
+      try {
+        setDoneUnDone('all')
+        await axios.post("https://todo-api-learning.herokuapp.com/v1/task/4", {
+          name: value,
+          done: false
+      })
+        getTodos()
+      } catch(err) {
+          alert(err.response.data.message)
+    }
     }
     
     function hanlePageClick(number) { 
@@ -129,8 +147,12 @@ async function doneTodo(id, completed, title) {
     }
 
     async function getTodos() {
-      const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
-      setTodos(data.data)
+      try {
+        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+        setTodos(data.data)
+      } catch(err) {
+        alert(err.response.data.message)
+        }
       
     }
 
