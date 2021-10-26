@@ -6,8 +6,8 @@ import Pagination from './Pagination'
 import InputToDo from './InputToDo'
 import upAr from './images/premium-icon-up-arrow-3987238.png'
 import downAr from './images/reverse.png'
-import env from "react-dotenv";
-require('dotenv').config()
+
+const myID = process.env["REACT_APP_ID"]
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -20,7 +20,7 @@ function App() {
   async function removeTodo(id) {
     try {
       setTodos(todos.filter(todo => todo.uuid !== id))
-      await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`)
+      await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`)
       
       if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
         setCurrentPage(currentPage - 1)
@@ -32,7 +32,7 @@ function App() {
 
 async function doneTodo(id, completed, title) {
   try {
-    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`, {
         name: title,
         done: !completed
         })
@@ -53,7 +53,7 @@ async function doneTodo(id, completed, title) {
   
   async function editToDo(id, newTitle, completed) {
     try {
-      await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`, {
+      await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`, {
         name: newTitle,
         done: completed
         })
@@ -71,26 +71,26 @@ async function doneTodo(id, completed, title) {
     try {
       if (flag === 'up') {
         if (doneUnDone === 'all') {
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=asc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?order=asc`)
           setTodos(data.data)
         }
         else if (doneUnDone === 'done'){
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=asc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=done&order=asc`)
           setTodos(data.data)
         } else {
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=asc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=undone&order=asc`)
           setTodos(data.data)
         }
       } else { 
         if (doneUnDone === 'all') {
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?order=desc`)
           setTodos(data.data)
         }
         else if (doneUnDone === 'done'){
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=done&order=desc`)
           setTodos(data.data)
         } else {
-          const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+          const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=undone&order=desc`)
           setTodos(data.data)
         }
       } } catch(err) {
@@ -108,11 +108,11 @@ async function doneTodo(id, completed, title) {
         setDoneUnDone('all')
       }
       else if (flag === 'done'){
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=done&order=desc")
+        const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=done&order=desc`)
         setDoneUnDone('done')
         setTodos(data.data)
       } else {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?filterBy=undone&order=desc")
+        const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?filterBy=undone&order=desc`)
         setTodos(data.data)
         setDoneUnDone('undone')
       } } catch(err) {
@@ -137,7 +137,7 @@ async function doneTodo(id, completed, title) {
   async function addTodo(value) {
       try {
         setDoneUnDone('all')
-        await axios.post("https://todo-api-learning.herokuapp.com/v1/task/4", {
+        await axios.post(`https://todo-api-learning.herokuapp.com/v1/task/${myID}`, {
           name: value,
           done: false
       })
@@ -153,7 +153,7 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        const data = await axios.get("https://todo-api-learning.herokuapp.com/v1/tasks/4?order=desc")
+        const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?order=desc`)
         setTodos(data.data)
       } catch(err) {
         alert(err.response.data.message)
