@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import TDList from './TDlLst'
 import Pagination from './Pagination'
 import InputToDo from './InputToDo'
+import upAr from './images/premium-icon-up-arrow-3987238.png'
+import downAr from './images/reverse.png'
+import env from "react-dotenv";
+require('dotenv').config()
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -17,6 +21,7 @@ function App() {
     try {
       setTodos(todos.filter(todo => todo.uuid !== id))
       await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/4/${id}`)
+      
       if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
         setCurrentPage(currentPage - 1)
       }} catch(err) {
@@ -177,9 +182,9 @@ async function doneTodo(id, completed, title) {
             </section>
             <section className="dund">
                 <span className="lblar"> Sort by date </span>
-                    <input className="btnD" onClick={() => sortByDate('up')} type="image" src="images/premium-icon-up-arrow-3987238.png" title="New first"/>
+                    <input className="btnD" onClick={() => sortByDate('up')} type="image" src={upAr} title="New first"/>
                 
-                    <input className="btnD" onClick={() => sortByDate('down')} type="image" src="images/reverse.png" title="Old first"/>
+                    <input className="btnD" onClick={() => sortByDate('down')} type="image" src={downAr} title="Old first"/>
                 
             </section>
         </section>

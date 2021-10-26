@@ -1,5 +1,6 @@
 import './App.css';
-import { useState } from 'react'
+import { useState } from 'react' 
+import trash from './images/premium-icon-trash-can-4914888.png'
 
 function TDCard({ todo, onChange, deleteTodo, editing}) {
   const [edit, setEdit] = useState(false)
@@ -42,7 +43,7 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
         </section>
         <section>
           <label className="lbltext"> { todo.createdAt.slice(0, 10) } </label>
-          <input type="image" className="btnD trash" src="premium-icon-trash-can-4914888.png" title="Delete plan" onClick={ () => {
+          <input type="image" className="btnD trash" src={trash} title="Delete plan" onClick={ () => {
             deleteTodo(todo.uuid)
             setEdit(false)} }/>
       </section>

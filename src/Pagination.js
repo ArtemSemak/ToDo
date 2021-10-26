@@ -1,5 +1,6 @@
 import './App.css';
 import right from './images/right.png'
+import left from './images/left.png'
 
 
 function Pagination({ todosLength, todosPerPage, pageClick, prevPage, nextPage, currentPage }) {   
@@ -13,7 +14,7 @@ function Pagination({ todosLength, todosPerPage, pageClick, prevPage, nextPage, 
         if (pages.length > 1) {
             return (
                     <section className='footer'>
-                            <input class="btnD arrows" type="image" src="./images/left.png" title="Previous page" onClick={prevPage}/>
+                            <input class="btnD arrows" type="image" src={left} title="Previous page" onClick={prevPage}/>
                             {
                                 pages.map(page => {
                                     if (page === currentPage){
