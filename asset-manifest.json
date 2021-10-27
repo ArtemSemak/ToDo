@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ToDo/static/css/main.40bd9d94.chunk.css",
-    "main.js": "/ToDo/static/js/main.8aa8fe47.chunk.js",
-    "main.js.map": "/ToDo/static/js/main.8aa8fe47.chunk.js.map",
+    "main.css": "/ToDo/static/css/main.2bc776a5.chunk.css",
+    "main.js": "/ToDo/static/js/main.c21f2e92.chunk.js",
+    "main.js.map": "/ToDo/static/js/main.c21f2e92.chunk.js.map",
     "runtime-main.js": "/ToDo/static/js/runtime-main.52f68f0e.js",
     "runtime-main.js.map": "/ToDo/static/js/runtime-main.52f68f0e.js.map",
     "static/js/2.596388b3.chunk.js": "/ToDo/static/js/2.596388b3.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.d225b22b.chunk.js": "/ToDo/static/js/3.d225b22b.chunk.js",
     "static/js/3.d225b22b.chunk.js.map": "/ToDo/static/js/3.d225b22b.chunk.js.map",
     "index.html": "/ToDo/index.html",
-    "static/css/main.40bd9d94.chunk.css.map": "/ToDo/static/css/main.40bd9d94.chunk.css.map",
+    "static/css/main.2bc776a5.chunk.css.map": "/ToDo/static/css/main.2bc776a5.chunk.css.map",
     "static/js/2.596388b3.chunk.js.LICENSE.txt": "/ToDo/static/js/2.596388b3.chunk.js.LICENSE.txt",
     "static/media/App.css": "/ToDo/static/media/SerreriaSobria.69d77958.otf",
     "static/media/left.50078bca.png": "/ToDo/static/media/left.50078bca.png",
@@ -22,7 +22,7 @@
   "entrypoints": [
     "static/js/runtime-main.52f68f0e.js",
     "static/js/2.596388b3.chunk.js",
-    "static/css/main.40bd9d94.chunk.css",
-    "static/js/main.8aa8fe47.chunk.js"
+    "static/css/main.2bc776a5.chunk.css",
+    "static/js/main.c21f2e92.chunk.js"
   ]
 }
