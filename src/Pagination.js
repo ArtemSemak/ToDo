@@ -1,34 +1,21 @@
 import './App.css';
-import right from './images/right.png'
-import left from './images/left.png'
+import { Pagination } from 'antd';
 
 
-function Pagination({ todosLength, todosPerPage, pageClick, prevPage, nextPage, currentPage }) {   
-    const pages = []
+
+function NewPagination({ todosLength, todosPerPage, pageClick}) {   
+    const totalTodos = Math.ceil(todosLength / todosPerPage)
     
-
-    for (let i = 1; i <= Math.ceil(todosLength / todosPerPage); i++) {
-        pages.push(i)
-    }
-    
-        if (pages.length > 1) {
+        if (totalTodos > 1) {
             return (
                     <section className='footer'>
-                            <input class="btnD arrows" type="image" src={left} title="Previous page" onClick={prevPage}/>
-                            {
-                                pages.map(page => {
-                                    if (page === currentPage){
-                                        return <input className='footer-item active' type="button" value={page} onClick={() => pageClick(page)}/>}
-                                        else {
-                                            return <input className='footer-item' type="button" value={page} onClick={() => pageClick(page)}/>
-                                        }})
-                            }
-                            <input class="btnD arrows" type="image" src={right} title="Next page" onClick={nextPage}/>
+                            <Pagination onChange={(page) => pageClick(page)} defaultPageSize={todosPerPage} defaultCurrent={1} total={todosLength} />
                     </section> 
+                    
         ) } else {
             return <span></span>
         }
     } 
 
 
-export default Pagination
+export default NewPagination

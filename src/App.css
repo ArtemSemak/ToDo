@@ -42,7 +42,7 @@ body, header {
 
 .inpTD {
   margin: 10px 0;
-  width: 500px;
+  width: 1000px;
   height: 30px;
 }
 
@@ -52,16 +52,23 @@ body, header {
   
 }
 
+.inputForEdit {
+  bottom: 23px;
+  height: 25px;
+  left: 23px
+
+}
 
 .td {
   display: flex;
   justify-content: space-between;
   border-style: solid;
-  border-color: gray;
+  border-color: rgb(206, 206, 206);
   border-width: 2px;
   margin-bottom: 10px;
+  padding-left: 5px;
   padding-top: 3px;
-  height: 30px;
+  height: 35px;
 }
 
 .btnD {
@@ -91,7 +98,8 @@ body, header {
 }
 
 .trash {
-  margin-left: 8px;
+  margin-left: 5px;
+  margin-right: 3px;
   
 }
 
@@ -113,27 +121,8 @@ body, header {
   margin: 0 5px;
 }
 
-span label input  {
-  display: none;/* <--скрываем дефолтный чекбокс */
-}
-label span.test {
-  height: 7px;
-  width: 7px;
-  border: 1px solid gray;
-  display: inline-block;
-  position: relative;
-  background-color:#FFF;
-  border-radius:2px;
-  padding:3px;
-  margin-left: 3px;
-}
-[type=checkbox]:checked + span:before {
-  content: '\2714';
-  position: absolute;
-  top: -5px;
-  left: 0;
-  font-size: 18px;
-  color:black;
+.checkBox {
+  margin-left: 5px;
 }
 
 

@@ -1,25 +1,34 @@
-import './App.css';
-import upAr from './images/premium-icon-up-arrow-3987238.png'
-import downAr from './images/reverse.png'
 
-function Filters({ doneUnDone, setDoneUnDone, setOrder }) {
+import './App.css';
+import {  Radio } from 'antd';
+import { ArrowUpOutlined } from '@ant-design/icons';
+import 'antd/dist/antd.css';
+
+
+
+
+function Filters({ doneUndone, setDoneUnDone, setOrder, order }) {
+
+    function handleDoneChange(e) {
+        setDoneUnDone(e.target.value)
+    }
+
+    function handleOrderChange(e) {
+        setOrder(e.target.value)
+    }
+
+
     return (
         <section className="control">
-            <section className="dund">
-                {doneUnDone === '' ? <input type="button" onClick={() => setDoneUnDone('')} value="All" className='active' title="Show all plans"/> : 
-                <input type="button" onClick={() => setDoneUnDone('')} value="All"  title="Show all plans"/>} 
-                {doneUnDone === 'done' ? <input type="button" onClick={() => setDoneUnDone('done')} value="Done" className='active' title="Show completed plans"/> : 
-                <input type="button" onClick={() => setDoneUnDone('done')} value="Done"  title="Show completed plans"/>}
-                {doneUnDone === 'undone' ? <input type="button" onClick={() => setDoneUnDone('undone')} value="Undone" className='active' title="Show uncompleted plans"/> : 
-                <input type="button" onClick={() => setDoneUnDone('undone')} value="Undone"  title="Show uncompleted plans"/>}
-            </section>
-            <section className="dund">
-                <span className="lblar"> Sort by date </span>
-                    <input className="btnD" onClick={() => setOrder('asc')} type="image" src={upAr} title="New first"/>
-                
-                    <input className="btnD" onClick={() => setOrder('desc')} type="image" src={downAr} title="Old first"/>
-                
-            </section>
+        <Radio.Group value={doneUndone} onChange={handleDoneChange}>
+          <Radio.Button value="">All</Radio.Button>
+          <Radio.Button value="done">Done</Radio.Button>
+          <Radio.Button value="undone">Undone</Radio.Button>
+        </Radio.Group>
+        <Radio.Group value={order} onChange={handleOrderChange}>
+          <Radio.Button value="asc">Asc</Radio.Button>
+          <Radio.Button value="desc">Desc</Radio.Button>
+        </Radio.Group>
         </section>
     )
 }

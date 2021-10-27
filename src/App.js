@@ -80,19 +80,6 @@ async function doneTodo(id, completed, title) {
         setTimeout(() => setShow(false), 3000)
         }
     }
- 
-
-  function nextPage() {
-    if (currentPage != Math.ceil(todos.length / todosPerPage)) setCurrentPage(currentPage + 1)
-      
-  }
-
-  function prevPage() {
-    if (currentPage != 1) setCurrentPage(currentPage - 1)
-    
-  }
-
-
 
   async function addTodo(value) {
       try {
@@ -128,7 +115,9 @@ async function doneTodo(id, completed, title) {
     useEffect(() => {getTodos()}, [])
 
     useEffect(() => {
+      setCurrentPage(1)
       getTodos()
+      
     }, [doneUnDone, order])
 
   return (
@@ -139,7 +128,7 @@ async function doneTodo(id, completed, title) {
             <p className="title">ToDo</p>
         </section>
           <InputToDo addTodo={addTodo}/>
-          <Filters doneUndone={doneUnDone} setDoneUnDone={setDoneUnDone} setOrder={setOrder} />
+          <Filters doneUndone={doneUnDone} setDoneUnDone={setDoneUnDone} setOrder={setOrder} order={order} />
     </header>
 
     <TDList edit={editToDo} sortedTodos={todosForCurrentPage} doneTodo={doneTodo} removeTodo={removeTodo}/>
@@ -148,7 +137,7 @@ async function doneTodo(id, completed, title) {
 
     <footer>
     
-      <Pagination currentPage={currentPage} todosLength={todos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} nextPage={nextPage} prevPage={prevPage}/>  
+      <Pagination  todosLength={todos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} />  
     
     </footer>
     <Modal visible={show} onClose={onClose} content={errorMsg} />

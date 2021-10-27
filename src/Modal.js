@@ -1,6 +1,5 @@
 import './App.css';
  function Modal({ visible, onClose, content }) {
-    console.log(visible)
     
 
     if (!visible) return null

@@ -1,20 +1,19 @@
+import 'antd/dist/antd.css';
 import './App.css'
 import { useState } from 'react'
+import {  Input } from 'antd'
 
-
+const { Search } = Input;
 function InputToDo({ addTodo }) {
     const [value, setValue] = useState('')
     
     return (
         <section>
-          <form onSubmit={event => {
-        event.preventDefault()
-        addTodo(value)
-        setValue('')
-      }}>
-            <input autoFocus type="text" value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." className="inpTD" title="Write your plan here"/>
-            <button type="submit"  className="btnAdd" title="Add your plan">Add</button>
-          </form> 
+            <Search onSearch={() => {
+                                addTodo(value)
+                                setValue('')
+              }} autoFocus type="text" value={value}  onChange={event => setValue(event.target.value)} 
+              enterButton='Add' placeholder="I want to do..." style={{ width: 560, height: 40}} title="Write your plan here"/>  
         </section>
     )
 }
