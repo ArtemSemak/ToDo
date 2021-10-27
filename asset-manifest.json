@@ -1,28 +1,27 @@
 {
   "files": {
-    "main.css": "/ToDo/static/css/main.2bc776a5.chunk.css",
-    "main.js": "/ToDo/static/js/main.c21f2e92.chunk.js",
-    "main.js.map": "/ToDo/static/js/main.c21f2e92.chunk.js.map",
-    "runtime-main.js": "/ToDo/static/js/runtime-main.52f68f0e.js",
-    "runtime-main.js.map": "/ToDo/static/js/runtime-main.52f68f0e.js.map",
-    "static/js/2.596388b3.chunk.js": "/ToDo/static/js/2.596388b3.chunk.js",
-    "static/js/2.596388b3.chunk.js.map": "/ToDo/static/js/2.596388b3.chunk.js.map",
-    "static/js/3.d225b22b.chunk.js": "/ToDo/static/js/3.d225b22b.chunk.js",
-    "static/js/3.d225b22b.chunk.js.map": "/ToDo/static/js/3.d225b22b.chunk.js.map",
+    "main.css": "/ToDo/static/css/main.b57d6d6f.chunk.css",
+    "main.js": "/ToDo/static/js/main.44fbe093.chunk.js",
+    "main.js.map": "/ToDo/static/js/main.44fbe093.chunk.js.map",
+    "runtime-main.js": "/ToDo/static/js/runtime-main.567aa218.js",
+    "runtime-main.js.map": "/ToDo/static/js/runtime-main.567aa218.js.map",
+    "static/css/2.a95be28f.chunk.css": "/ToDo/static/css/2.a95be28f.chunk.css",
+    "static/js/2.c32ae5a2.chunk.js": "/ToDo/static/js/2.c32ae5a2.chunk.js",
+    "static/js/2.c32ae5a2.chunk.js.map": "/ToDo/static/js/2.c32ae5a2.chunk.js.map",
+    "static/js/3.0d39e1e6.chunk.js": "/ToDo/static/js/3.0d39e1e6.chunk.js",
+    "static/js/3.0d39e1e6.chunk.js.map": "/ToDo/static/js/3.0d39e1e6.chunk.js.map",
     "index.html": "/ToDo/index.html",
-    "static/css/main.2bc776a5.chunk.css.map": "/ToDo/static/css/main.2bc776a5.chunk.css.map",
-    "static/js/2.596388b3.chunk.js.LICENSE.txt": "/ToDo/static/js/2.596388b3.chunk.js.LICENSE.txt",
+    "static/css/2.a95be28f.chunk.css.map": "/ToDo/static/css/2.a95be28f.chunk.css.map",
+    "static/css/main.b57d6d6f.chunk.css.map": "/ToDo/static/css/main.b57d6d6f.chunk.css.map",
+    "static/js/2.c32ae5a2.chunk.js.LICENSE.txt": "/ToDo/static/js/2.c32ae5a2.chunk.js.LICENSE.txt",
     "static/media/App.css": "/ToDo/static/media/SerreriaSobria.69d77958.otf",
-    "static/media/left.50078bca.png": "/ToDo/static/media/left.50078bca.png",
-    "static/media/premium-icon-trash-can-4914888.25b0789a.png": "/ToDo/static/media/premium-icon-trash-can-4914888.25b0789a.png",
-    "static/media/premium-icon-up-arrow-3987238.b7a7a2fa.png": "/ToDo/static/media/premium-icon-up-arrow-3987238.b7a7a2fa.png",
-    "static/media/reverse.003aadf9.png": "/ToDo/static/media/reverse.003aadf9.png",
-    "static/media/right.ad2ded34.png": "/ToDo/static/media/right.ad2ded34.png"
+    "static/media/premium-icon-trash-can-4914888.25b0789a.png": "/ToDo/static/media/premium-icon-trash-can-4914888.25b0789a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.52f68f0e.js",
-    "static/js/2.596388b3.chunk.js",
-    "static/css/main.2bc776a5.chunk.css",
-    "static/js/main.c21f2e92.chunk.js"
+    "static/js/runtime-main.567aa218.js",
+    "static/css/2.a95be28f.chunk.css",
+    "static/js/2.c32ae5a2.chunk.js",
+    "static/css/main.b57d6d6f.chunk.css",
+    "static/js/main.44fbe093.chunk.js"
   ]
 }
