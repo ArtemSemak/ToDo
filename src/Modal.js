@@ -1,11 +1,11 @@
 import './App.css';
- function Modal({ visible, onClose, content, footer }) {
+ function Modal({ visible, onClose, content }) {
     console.log(visible)
     
 
     if (!visible) return null
      return (
-        <div className='modal' onClick={onClose}>
+        <div className='modal-window' onClick={onClose}>
         <div className='modal-dialog' onClick={e => e.stopPropagation()}>
           <div className='modal-header'>
             <h3 className='modal-title'>Oops!</h3>
@@ -16,7 +16,7 @@ import './App.css';
           <div className='modal-body'>
             <div className='modal-content'>{content}</div>
           </div>
-          {footer && <div className='modal-footer'>{footer}</div>}
+          
         </div>
       </div>
      )

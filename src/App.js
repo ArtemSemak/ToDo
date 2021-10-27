@@ -9,6 +9,7 @@ import Modal from './Modal';
 
 
 const myID = process.env["REACT_APP_ID"]
+const url = process.env["REACT_APP_URL"]
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -27,20 +28,21 @@ function App() {
   async function removeTodo(id) {
     try {
       setTodos(todos.filter(todo => todo.uuid !== id))
-      await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`)
+      await axios.delete(`${url}/${myID}/${id}`)
       
       if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
         setCurrentPage(currentPage - 1)
       }} catch(err) {
         setErrorMsg(err.response.data.message)
         setShow(true)
+        setTimeout(() => setShow(false), 3000)
         }
   }
 
 
 async function doneTodo(id, completed, title) {
   try {
-    await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`, {
+    await axios.patch(`${url}/${myID}/${id}`, {
         name: title,
         done: !completed
         })
@@ -55,6 +57,7 @@ async function doneTodo(id, completed, title) {
         ) } catch(err) {
           setErrorMsg(err.response.data.message)
           setShow(true)
+          setTimeout(() => setShow(false), 3000)
           }
     
     
@@ -62,7 +65,7 @@ async function doneTodo(id, completed, title) {
   
   async function editToDo(id, newTitle, completed) {
     try {
-      await axios.patch(`https://todo-api-learning.herokuapp.com/v1/task/${myID}/${id}`, {
+      await axios.patch(`${url}/${myID}/${id}`, {
         name: newTitle,
         done: completed
         })
@@ -74,6 +77,7 @@ async function doneTodo(id, completed, title) {
       ))} catch(err) {
         setErrorMsg(err.response.data.message)
         setShow(true)
+        setTimeout(() => setShow(false), 3000)
         }
     }
  
@@ -93,7 +97,7 @@ async function doneTodo(id, completed, title) {
   async function addTodo(value) {
       try {
         setDoneUnDone('')
-        await axios.post(`https://todo-api-learning.herokuapp.com/v1/task/${myID}`, {
+        await axios.post(`${url}/${myID}`, {
           name: value,
           done: false
       })
@@ -101,6 +105,7 @@ async function doneTodo(id, completed, title) {
       } catch(err) {
         setErrorMsg(err.response.data.message)
         setShow(true)
+        setTimeout(() => setShow(false), 3000)
     }
     }
     
@@ -110,11 +115,12 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        const data = await axios.get(`https://todo-api-learning.herokuapp.com/v1/tasks/${myID}?order=${order}&filterBy=${doneUnDone}`)
+        const data = await axios.get(`${url}s/${myID}?order=${order}&filterBy=${doneUnDone}`)
         setTodos(data.data)
       } catch(err) {
         setErrorMsg(err.response.data.message)
         setShow(true)
+        setTimeout(setShow(false), 3000)
         }
       
     }
@@ -137,7 +143,7 @@ async function doneTodo(id, completed, title) {
     </header>
 
     <TDList edit={editToDo} sortedTodos={todosForCurrentPage} doneTodo={doneTodo} removeTodo={removeTodo}/>
-    <Modal visible={show} onClose={onClose} content={errorMsg} footer={<button onClick={onClose}>Close</button>}/>
+    
     
 
     <footer>
@@ -145,6 +151,7 @@ async function doneTodo(id, completed, title) {
       <Pagination currentPage={currentPage} todosLength={todos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} nextPage={nextPage} prevPage={prevPage}/>  
     
     </footer>
+    <Modal visible={show} onClose={onClose} content={errorMsg} />
     </body>
     </div>
   );

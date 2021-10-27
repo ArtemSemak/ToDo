@@ -15,6 +15,10 @@
   font-family: Serreria Sobria;
 }
 
+body {
+  min-height: 100vh;
+}
+
 body, header {
   display: flex;
   flex-direction: column;
@@ -195,18 +199,15 @@ label span.test {
   text-align: left;
 } */
 
-.modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
+.modal-window {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.25);
   animation-name: appear;
   animation-duration: 300ms;
 }
@@ -254,13 +255,15 @@ label span.test {
 }
 .modal-content {
   padding: 1rem;
-  width: 90%;
+  width: 85%;
   font-size: 12px;
 }
 
+.btnCls {
+  background-color: red;
+}
 
-
-.btnCls:active {
+.btnCls:hover {
   background-color: #FFF;
 }
 
