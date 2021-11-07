@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    
+    
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+   
+    
+    
+    
+  </head>
+  <body>
+    <header>
+        <section>
+            <p class="title">ToDo</p>
+        </section>
+        <section>
+            <input type="text" placeholder="I want to do..." class="inpTD" title="Write your plan here">
+            <input type="button" class="btnAdd" value="Add" title="Add your plan">
+        </section>
+        <section class="control">
+            <section>
+                <input type="button" value="All" title="Show all plans">
+                <input type="button" value="Done" title="Show completed plans">
+                <input type="button" value="Undone" class="btnU" title="Show uncompleted plans">
+            </section>
+            <section>
+                <label> Sort by date
+                    <input class="btnD" type="image" src="./images/premium-icon-up-arrow-3987238.png" title="New first">
+                </label>
+                    <input class="btnD" type="image" src="./images/reverse.png" title="Old first">
+                
+            </section>
+        </section>
+    </header>
+
+    <main class="tds">
+    <section class="td">
+        <section>
+            <span><label class="hide">
+                <input type='checkbox'>
+                <span></span>
+                todo
+              </label> </span>
+        </section>
+        <section>
+          <label class="lbltext">12.23.2001<input type="image" class="btnD trash" src="./images/premium-icon-trash-can-4914888.png" title="Delete plan"></label>
+      </section>
+    </section>
+    <section class="td">
+        <section>
+            <span><label class="hide">
+                <input type='checkbox'>
+                <span></span>
+                todo
+              </label> </span>
+        </section>
+        <section>
+          <label class="lbltext">12.23.2001<input type="image" class="btnD trash" src="./images/premium-icon-trash-can-4914888.png" title="Delete plan"></label>
+      </section>
+    </section>
+    
+    
+    
+    
+    </main>
+
+    
+
+    <footer class="footer">
+      
+        <input class="btnD arrows" type="image" src="./images/left.png" title="Previous page">
+        <input type="button" value="1">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <input class="btnD arrows" type="image" src="./images/right.png" title="Next page">
+      
+    </footer>
+  </body>
+</html>
