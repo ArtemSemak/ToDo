@@ -6,7 +6,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 function TDCard({ todo, onChange, deleteTodo, editing}) {
   const [edit, setEdit] = useState(false)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(todo.name)
   const classes = ['titleToDo']
   if (todo.done) {
     classes.push('done')
@@ -34,7 +34,7 @@ function TDCard({ todo, onChange, deleteTodo, editing}) {
         <section >
                <Checkbox className='checkBox' onChange={ () => onChange(todo.uuid, todo.done, todo.name) } checked={ todo.done } ></Checkbox>
                {edit ? <Input className='inputForEdit' autoFocus onBlur={() => setEdit(false)} onPressEnter={event => submitHandler(event)} onKeyDown={ (event) => escHandler(event)} 
-               value={value} onChange={event => setValue(event.target.value)} placeholder="I want to do..." /> : 
+               value={value} onChange={event => setValue(event.target.value)}  /> : 
                <button onClick={ clickHandler } className='qwe'><span  className={ classes.join(' ') }> { todo.name } </span></button>}
         </section>
         <section>
