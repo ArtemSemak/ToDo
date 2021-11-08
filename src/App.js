@@ -102,12 +102,15 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        const data = await axios.get(`${url}s/${myID}?order=${order}&filterBy=${doneUnDone}`)
+        const data = await axios.get(`https://todo-api-artemsemak.herokuapp.com/api/todos`, {headers: {
+          "x-auth": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbiI6InRlc3QifQ.pjMdOthXfkkXhhI6ZV5iEfWdqb0DV6dVXVzEwHM0fa0"
+        }})
         setTodos(data.data)
       } catch(err) {
-        setErrorMsg(err.response.data.message)
-        setShow(true)
-        setTimeout(setShow(false), 3000)
+        // console.log(err)
+        // setErrorMsg(err)
+        // setShow(true)
+        // setTimeout(setShow(false), 3000)
         }
       
     }
