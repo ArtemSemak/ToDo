@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/ToDo/static/css/main.b57d6d6f.chunk.css",
-    "main.js": "/ToDo/static/js/main.44fbe093.chunk.js",
-    "main.js.map": "/ToDo/static/js/main.44fbe093.chunk.js.map",
-    "runtime-main.js": "/ToDo/static/js/runtime-main.567aa218.js",
-    "runtime-main.js.map": "/ToDo/static/js/runtime-main.567aa218.js.map",
+    "main.css": "/ToDo/static/css/main.c9ac2f56.chunk.css",
+    "main.js": "/ToDo/static/js/main.8c60b387.chunk.js",
+    "main.js.map": "/ToDo/static/js/main.8c60b387.chunk.js.map",
+    "runtime-main.js": "/ToDo/static/js/runtime-main.83567dcb.js",
+    "runtime-main.js.map": "/ToDo/static/js/runtime-main.83567dcb.js.map",
     "static/css/2.a95be28f.chunk.css": "/ToDo/static/css/2.a95be28f.chunk.css",
-    "static/js/2.c32ae5a2.chunk.js": "/ToDo/static/js/2.c32ae5a2.chunk.js",
-    "static/js/2.c32ae5a2.chunk.js.map": "/ToDo/static/js/2.c32ae5a2.chunk.js.map",
-    "static/js/3.0d39e1e6.chunk.js": "/ToDo/static/js/3.0d39e1e6.chunk.js",
-    "static/js/3.0d39e1e6.chunk.js.map": "/ToDo/static/js/3.0d39e1e6.chunk.js.map",
+    "static/js/2.68d865b9.chunk.js": "/ToDo/static/js/2.68d865b9.chunk.js",
+    "static/js/2.68d865b9.chunk.js.map": "/ToDo/static/js/2.68d865b9.chunk.js.map",
+    "static/js/3.2b3faa3e.chunk.js": "/ToDo/static/js/3.2b3faa3e.chunk.js",
+    "static/js/3.2b3faa3e.chunk.js.map": "/ToDo/static/js/3.2b3faa3e.chunk.js.map",
     "index.html": "/ToDo/index.html",
     "static/css/2.a95be28f.chunk.css.map": "/ToDo/static/css/2.a95be28f.chunk.css.map",
-    "static/css/main.b57d6d6f.chunk.css.map": "/ToDo/static/css/main.b57d6d6f.chunk.css.map",
-    "static/js/2.c32ae5a2.chunk.js.LICENSE.txt": "/ToDo/static/js/2.c32ae5a2.chunk.js.LICENSE.txt",
+    "static/css/main.c9ac2f56.chunk.css.map": "/ToDo/static/css/main.c9ac2f56.chunk.css.map",
+    "static/js/2.68d865b9.chunk.js.LICENSE.txt": "/ToDo/static/js/2.68d865b9.chunk.js.LICENSE.txt",
     "static/media/App.css": "/ToDo/static/media/SerreriaSobria.69d77958.otf",
     "static/media/premium-icon-trash-can-4914888.25b0789a.png": "/ToDo/static/media/premium-icon-trash-can-4914888.25b0789a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.567aa218.js",
+    "static/js/runtime-main.83567dcb.js",
     "static/css/2.a95be28f.chunk.css",
-    "static/js/2.c32ae5a2.chunk.js",
-    "static/css/main.b57d6d6f.chunk.css",
-    "static/js/main.44fbe093.chunk.js"
+    "static/js/2.68d865b9.chunk.js",
+    "static/css/main.c9ac2f56.chunk.css",
+    "static/js/main.8c60b387.chunk.js"
   ]
 }
