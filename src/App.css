@@ -260,6 +260,11 @@ body, header {
   margin: 0;
 }
 
+.ant-modal-body {
+  padding-bottom: 0px !important;
+  padding-top: 33px !important;
+}
+
 @keyframes appear {
   from {
     opacity: 0;
