@@ -31,7 +31,7 @@ function App() {
       "x-auth": sessionStorage.getItem('jwt')
     }
   }
-
+  
 
   function onClose() {
     setShow(false)
@@ -40,6 +40,7 @@ function App() {
   function logOut() {
     sessionStorage.removeItem('jwt')
     sessionStorage.removeItem('user')
+    setTodos([])
     setIsLogged(false)
     setShowLogin(true)
   }
@@ -149,7 +150,8 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        
+        console.log(isLogged)
+        console.log(sessionStorage.getItem('user'))
         const data = await axios.get(`${url}s/${sessionStorage.getItem("user")}?order=${order}&filterBy=${doneUnDone}`, config)
         setTodos(data.data)
       } catch(err) {
