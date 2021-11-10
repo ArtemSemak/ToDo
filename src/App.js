@@ -102,11 +102,14 @@ async function doneTodo(id, completed, title) {
 
   async function addUser(user) {
     try {
-      await axios.post('https://todo-api-artemsemak.herokuapp.com/registration', user)
+      const resp = await axios.post('https://todo-api-artemsemak.herokuapp.com/registration', user)
+      console.log(resp)
       setShowLogin(true)
       setShowRegistration(false)
     } catch(e) {
-      console.log(e)
+      setErrorMsg('This user already exists')
+      setShow(true)
+      setTimeout(() => setShow(false), 3000)
     }
   }
 
@@ -120,9 +123,9 @@ async function doneTodo(id, completed, title) {
       setShowLogin(false)
     } catch(e) {
       console.log(e)
-      // setErrorMsg(e)
-      // setShow(true)
-      // setTimeout(() => setShow(false), 3000)
+      setErrorMsg('Incorrect password or login')
+      setShow(true)
+      setTimeout(() => setShow(false), 3000)
     }
   }
 
