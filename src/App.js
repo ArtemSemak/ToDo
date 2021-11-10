@@ -8,6 +8,7 @@ import Filters from './Filters'
 import Modal from './Modal';
 import Registration from './Registration';
 import Login from './Login';
+import { Button } from 'antd';
 
 
 const myID = process.env["REACT_APP_ID"]
@@ -21,18 +22,26 @@ function App() {
   const [show, setShow] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const [showRegistration, setShowRegistration] = useState(false)
-  const [showLogin, setShowLogin] = useState(true)
-  const [jwt, setJwt] = useState('')
-  const [user, setUser] = useState('')
+  const [showLogin, setShowLogin] = useState(false)
+  const [isLogged, setIsLogged] = useState(true)
   const todosPerPage = 5
   const todosForCurrentPage = todos.slice(currentPage * todosPerPage - todosPerPage, currentPage * todosPerPage )
   const config = {
     headers : {
-      "x-auth": jwt
+      "x-auth": sessionStorage.getItem('jwt')
     }
   }
+
+
   function onClose() {
     setShow(false)
+  }
+
+  function logOut() {
+    sessionStorage.removeItem('jwt')
+    sessionStorage.removeItem('user')
+    setIsLogged(false)
+    setShowLogin(true)
   }
 
   async function removeTodo(id) {
@@ -40,7 +49,7 @@ function App() {
       setTodos(todos.filter(todo => todo.uuid !== id))
       console.log(id)
       console.log(todos)
-      await axios.delete(`${url}/${id}/${user}`, config)
+      await axios.delete(`${url}/${id}/${sessionStorage.getItem("user")}`, config)
       
       if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
         setCurrentPage(currentPage - 1)
@@ -54,7 +63,7 @@ function App() {
 
 async function doneTodo(id, completed, title) {
   try {
-    await axios.put(`${url}/${id}/${user}`, {
+    await axios.put(`${url}/${id}/${sessionStorage.getItem("user")}`, {
         name: title,
         done: !completed
         }, config)
@@ -75,7 +84,7 @@ async function doneTodo(id, completed, title) {
   
   async function editToDo(id, newTitle, completed) {
     try {
-      await axios.put(`${url}/${id}/${user}`, {
+      await axios.put(`${url}/${id}/${sessionStorage.getItem("user")}`, {
         name: newTitle,
         done: completed
         }, config)
@@ -104,9 +113,9 @@ async function doneTodo(id, completed, title) {
     try {
       
       const response = await axios.post('https://todo-api-artemsemak.herokuapp.com/login', logUser)
-      setUser(logUser.login)
-      console.log(user)
-      setJwt(response.data)
+      sessionStorage.setItem("jwt", response.data)
+      sessionStorage.setItem("user", logUser.login)
+      setIsLogged(true)
       setShowLogin(false)
     } catch(e) {
       console.log(e)
@@ -120,7 +129,7 @@ async function doneTodo(id, completed, title) {
   async function addTodo(value) {
       try {
         setDoneUnDone('')
-        await axios.post(`${url}/${user}`, {
+        await axios.post(`${url}/${sessionStorage.getItem("user")}`, {
           name: value,
           done: false
       }, config)
@@ -140,8 +149,8 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        console.log(user)
-        const data = await axios.get(`${url}s/${user}?order=${order}&filterBy=${doneUnDone}`, config)
+        
+        const data = await axios.get(`${url}s/${sessionStorage.getItem("user")}?order=${order}&filterBy=${doneUnDone}`, config)
         setTodos(data.data)
       } catch(err) {
         // setErrorMsg(err)
@@ -151,13 +160,18 @@ async function doneTodo(id, completed, title) {
       
     }
 
-
+    useEffect(() => {
+      
+      if (!sessionStorage.getItem('user')) {
+        setIsLogged(false)
+        setShowLogin(true)}
+    }, [])
 
     useEffect(() => {
       setCurrentPage(1)
       getTodos()
       
-    }, [doneUnDone, order, jwt])
+    }, [doneUnDone, order, isLogged])
 
   return (
     <div className="App">
@@ -174,10 +188,10 @@ async function doneTodo(id, completed, title) {
     
     
 
-    <footer>
+    <footer className='mainfooter'>
     
       <Pagination  todosLength={todos.length} todosPerPage={todosPerPage} pageClick={hanlePageClick} />  
-    
+      <Button onClick={logOut} className='logout'>Log out</Button>
     </footer>
     <Modal visible={show} onClose={onClose} content={errorMsg} />
     <Registration addUser={addUser} showRegistration={showRegistration} setShowRegistration={setShowRegistration} setShowLogin={setShowLogin}/>

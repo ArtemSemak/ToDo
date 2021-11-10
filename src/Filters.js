@@ -21,7 +21,7 @@ function Filters({ doneUndone, setDoneUnDone, setOrder, order }) {
     return (
         <section className="control">
         <Radio.Group value={doneUndone} onChange={handleDoneChange}>
-          <Radio.Button value="">All</Radio.Button>
+          <Radio.Button value="all">All</Radio.Button>
           <Radio.Button value="done">Done</Radio.Button>
           <Radio.Button value="undone">Undone</Radio.Button>
         </Radio.Group>

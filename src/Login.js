@@ -4,11 +4,6 @@ import './App.css';
 
 function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
 
-    function backToLogin() {
-      setShowRegistration(false)
-      setShowLogin(true)
-    }
-
     function openRegistration() {
         setShowLogin(false)
         setShowRegistration(true)
@@ -24,7 +19,7 @@ function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
       };
 
     return (
-        <Modal title="Basic Modal" visible={showLogin} onCancel={backToLogin} footer={[]}>
+        <Modal title="Log in" visible={showLogin} closable={false}  footer={[]}>
          <Form
       name="basic"
       labelCol={{
@@ -76,19 +71,19 @@ function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
         }}
       >
         <Button type="primary" htmlType="submit">
-          Submit
+          Log in
         </Button>
       </Form.Item>
 
 
       <Form.Item
         wrapperCol={{
-          offset: 16,
+          offset: 18,
           span: 16,
         }}
       >
         <Button type="link" onClick={openRegistration}>
-          Registration
+          Sign up
         </Button>
       </Form.Item>
     </Form>

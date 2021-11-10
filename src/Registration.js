@@ -3,16 +3,14 @@ import { Modal, Button, Form, Input } from 'antd';
 
 function Registration({ addUser, showRegistration, setShowRegistration, setShowLogin }) {
 
+  function backToLogin() {
+    setShowRegistration(false)
+    setShowLogin(true)
+  }
 
 
   function onFinish(values) {
-        
-        
             addUser(values)
-            
-        
-            
-        
       };
     
       function onFinishFailed(errorInfo) {
@@ -20,7 +18,7 @@ function Registration({ addUser, showRegistration, setShowRegistration, setShowL
       };
 
     return (
-        <Modal title="Basic Modal" visible={showRegistration} footer={[]}>
+        <Modal title="Sign up" visible={showRegistration} onCancel={backToLogin} footer={[]}>
          <Form
       name="basic"
       labelCol={{
@@ -72,7 +70,7 @@ function Registration({ addUser, showRegistration, setShowRegistration, setShowL
         }}
       >
         <Button type="primary" htmlType='submit'>
-          Submit
+          Sign up
         </Button>
       </Form.Item>
 

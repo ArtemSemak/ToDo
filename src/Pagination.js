@@ -10,6 +10,7 @@ function NewPagination({ todosLength, todosPerPage, pageClick}) {
             return (
                     <section className='footer'>
                             <Pagination onChange={(page) => pageClick(page)} defaultPageSize={todosPerPage} defaultCurrent={1} total={todosLength} />
+                            
                     </section> 
                     
         ) } else {

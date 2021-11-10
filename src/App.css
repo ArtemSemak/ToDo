@@ -265,6 +265,16 @@ body, header {
   padding-top: 33px !important;
 }
 
+.logout {
+  margin-top: 10px;
+}
+
+.mainfooter {
+  display: flex;
+  flex-direction: column;
+
+}
+
 @keyframes appear {
   from {
     opacity: 0;
