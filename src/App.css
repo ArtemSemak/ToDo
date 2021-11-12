@@ -1,8 +1,8 @@
 @font-face {
     
-  font-family: "Serreria Sobria"; 
+  font-family: "BalsamiqSans"; 
   
-  src: url("SerreriaSobria.otf") format("truetype"); 
+  src: url("BalsamiqSans-Regular.ttf") format("truetype"); 
   font-style: normal; 
   font-weight: normal; 
   } 
@@ -12,7 +12,7 @@
 }
 
 * {
-  font-family: Serreria Sobria;
+  font-family: BalsamiqSans;
 }
 
 body {
@@ -27,7 +27,7 @@ body, header {
 }
 
 .title {
-  font-size: 50px;
+  font-size: 60px;
   text-align: center;
 
 }
@@ -86,7 +86,7 @@ body, header {
 }
 
 .date {
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .btnAdd {
@@ -94,7 +94,7 @@ body, header {
 }
 
 .lbltext {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .trash {
@@ -178,6 +178,10 @@ body, header {
   display: inline;
   margin-left: 5px;
   width: 15px;
+}
+
+.titleToDo {
+  font-size: 15px;
 }
 
 /* .titleToDo {
