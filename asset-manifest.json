@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ToDo/static/css/main.ef733f2e.chunk.css",
+    "main.css": "/ToDo/static/css/main.d200abe8.chunk.css",
     "main.js": "/ToDo/static/js/main.4257c2e4.chunk.js",
     "main.js.map": "/ToDo/static/js/main.4257c2e4.chunk.js.map",
     "runtime-main.js": "/ToDo/static/js/runtime-main.83567dcb.js",
@@ -12,16 +12,16 @@
     "static/js/3.2b3faa3e.chunk.js.map": "/ToDo/static/js/3.2b3faa3e.chunk.js.map",
     "index.html": "/ToDo/index.html",
     "static/css/2.a95be28f.chunk.css.map": "/ToDo/static/css/2.a95be28f.chunk.css.map",
-    "static/css/main.ef733f2e.chunk.css.map": "/ToDo/static/css/main.ef733f2e.chunk.css.map",
+    "static/css/main.d200abe8.chunk.css.map": "/ToDo/static/css/main.d200abe8.chunk.css.map",
     "static/js/2.813d4bd8.chunk.js.LICENSE.txt": "/ToDo/static/js/2.813d4bd8.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/ToDo/static/media/SerreriaSobria.69d77958.otf",
+    "static/media/App.css": "/ToDo/static/media/BalsamiqSans-Regular.600fc423.ttf",
     "static/media/premium-icon-trash-can-4914888.25b0789a.png": "/ToDo/static/media/premium-icon-trash-can-4914888.25b0789a.png"
   },
   "entrypoints": [
     "static/js/runtime-main.83567dcb.js",
     "static/css/2.a95be28f.chunk.css",
     "static/js/2.813d4bd8.chunk.js",
-    "static/css/main.ef733f2e.chunk.css",
+    "static/css/main.d200abe8.chunk.css",
     "static/js/main.4257c2e4.chunk.js"
   ]
 }
