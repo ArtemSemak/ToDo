@@ -4,6 +4,11 @@ import './App.css';
 
 function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
 
+  const validateMessages = {
+    required: "'${name}' is required!",
+    min: "Login is required"
+  };
+
     function openRegistration() {
         setShowLogin(false)
         setShowRegistration(true)
@@ -38,10 +43,11 @@ function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
       <Form.Item
         label="Login"
         name="login"
+        validateMessages={validateMessages}
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            min: 3,
           },
         ]}
       >
@@ -51,10 +57,11 @@ function Login({ loginUser, showLogin, setShowLogin, setShowRegistration}) {
       <Form.Item
         label="Password"
         name="password"
+        validateMessages={validateMessages}
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            min: 3,
           },
         ]}
       >

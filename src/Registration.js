@@ -3,6 +3,11 @@ import { Modal, Button, Form, Input } from 'antd';
 
 function Registration({ addUser, showRegistration, setShowRegistration, setShowLogin }) {
 
+  const validateMessages = {
+    required: "'${name}' is required!",
+    min: "Login is required"
+  };
+
   function backToLogin() {
     setShowRegistration(false)
     setShowLogin(true)
@@ -37,10 +42,11 @@ function Registration({ addUser, showRegistration, setShowRegistration, setShowL
       <Form.Item
         label="Login"
         name="login"
+        validateMessages={validateMessages}
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            min: 3,
           },
         ]}
       >
@@ -50,10 +56,11 @@ function Registration({ addUser, showRegistration, setShowRegistration, setShowL
       <Form.Item
         label="Password"
         name="password"
+        validateMessages={validateMessages}
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            min: 3,
           },
         ]}
       >
