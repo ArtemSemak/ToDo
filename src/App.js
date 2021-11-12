@@ -22,8 +22,8 @@ function App() {
   const [show, setShow] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const [showRegistration, setShowRegistration] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
-  const [isLogged, setIsLogged] = useState(true)
+  const [showLogin, setShowLogin] = useState(true)
+  const [isLogged, setIsLogged] = useState(false)
   const todosPerPage = 5
   const todosForCurrentPage = todos.slice(currentPage * todosPerPage - todosPerPage, currentPage * todosPerPage )
   const config = {
@@ -39,7 +39,6 @@ function App() {
 
   function logOut() {
     sessionStorage.removeItem('jwt')
-    sessionStorage.removeItem('user')
     setTodos([])
     setIsLogged(false)
     setShowLogin(true)
@@ -50,12 +49,12 @@ function App() {
       setTodos(todos.filter(todo => todo.uuid !== id))
       console.log(id)
       console.log(todos)
-      await axios.delete(`${url}/${id}/${sessionStorage.getItem("user")}`, config)
+      await axios.delete(`${url}/${id}`, config)
       
       if (todosForCurrentPage.length - 1 === 0 && currentPage != 1) {
         setCurrentPage(currentPage - 1)
-      }} catch(err) {
-        setErrorMsg(err.response.data.message)
+      }} catch(e) {
+        setErrorMsg(e.response.data)
         setShow(true)
         setTimeout(() => setShow(false), 3000)
         }
@@ -64,7 +63,7 @@ function App() {
 
 async function doneTodo(id, completed, title) {
   try {
-    await axios.put(`${url}/${id}/${sessionStorage.getItem("user")}`, {
+    await axios.put(`${url}/${id}`, {
         name: title,
         done: !completed
         }, config)
@@ -76,8 +75,10 @@ async function doneTodo(id, completed, title) {
             return todo
           }
           )
-        ) } catch(err) {
-          console.log(err)
+        ) } catch(e) {
+          setErrorMsg(e.response.data)
+          setShow(true)
+          setTimeout(() => setShow(false), 3000)
           }
     
     
@@ -85,7 +86,7 @@ async function doneTodo(id, completed, title) {
   
   async function editToDo(id, newTitle, completed) {
     try {
-      await axios.put(`${url}/${id}/${sessionStorage.getItem("user")}`, {
+      await axios.put(`${url}/${id}`, {
         name: newTitle,
         done: completed
         }, config)
@@ -94,20 +95,22 @@ async function doneTodo(id, completed, title) {
           if (todo.uuid === id) {
             todo.name = newTitle
           } return todo}
-      ))} catch(err) {
-        console.log(err)
+      ))} catch(e) {
+        setErrorMsg(e.response.data)
+        setShow(true)
+        setTimeout(() => setShow(false), 3000)
         }
     }
   
 
   async function addUser(user) {
     try {
-      const resp = await axios.post('https://todo-api-artemsemak.herokuapp.com/registration', user)
-      console.log(resp)
+      await axios.post('https://todo-api-artemsemak.herokuapp.com/registration', user)
+      
       setShowLogin(true)
       setShowRegistration(false)
     } catch(e) {
-      setErrorMsg('This user already exists')
+      setErrorMsg(e.response.data)
       setShow(true)
       setTimeout(() => setShow(false), 3000)
     }
@@ -118,12 +121,10 @@ async function doneTodo(id, completed, title) {
       
       const response = await axios.post('https://todo-api-artemsemak.herokuapp.com/login', logUser)
       sessionStorage.setItem("jwt", response.data)
-      sessionStorage.setItem("user", logUser.login)
       setIsLogged(true)
       setShowLogin(false)
     } catch(e) {
-      console.log(e)
-      setErrorMsg('Incorrect password or login')
+      setErrorMsg(e.response.data)
       setShow(true)
       setTimeout(() => setShow(false), 3000)
     }
@@ -133,15 +134,15 @@ async function doneTodo(id, completed, title) {
   async function addTodo(value) {
       try {
         setDoneUnDone('')
-        await axios.post(`${url}/${sessionStorage.getItem("user")}`, {
+        await axios.post(`${url}`, {
           name: value,
           done: false
       }, config)
         setCurrentPage(1)
         setDoneUnDone('all')
         getTodos()
-      } catch(err) {
-        setErrorMsg(err.response.data.message)
+      } catch(e) {
+        setErrorMsg(e.response.data)
         setShow(true)
         setTimeout(() => setShow(false), 3000)
     }
@@ -153,29 +154,29 @@ async function doneTodo(id, completed, title) {
 
     async function getTodos() {
       try {
-        console.log(isLogged)
-        console.log(sessionStorage.getItem('user'))
-        const data = await axios.get(`${url}s/${sessionStorage.getItem("user")}?order=${order}&filterBy=${doneUnDone}`, config)
+
+        const data = await axios.get(`${url}s?order=${order}&filterBy=${doneUnDone}`, config)
         setTodos(data.data)
-      } catch(err) {
-        // setErrorMsg(err)
-        // setShow(true)
-        // setTimeout(setShow(false), 3000)
+      } catch(e) {
+        setErrorMsg(e.response.data)
+        setShow(true)
+        setTimeout(() => setShow(false), 3000)
         }
       
     }
 
     useEffect(() => {
       
-      if (!sessionStorage.getItem('user')) {
-        setIsLogged(false)
-        setShowLogin(true)}
+      if (sessionStorage.getItem('jwt')) {
+        setIsLogged(true)
+        setShowLogin(false)}
     }, [])
 
     useEffect(() => {
+      if (sessionStorage.getItem('jwt')) {
       setCurrentPage(1)
       getTodos()
-      
+    }
     }, [doneUnDone, order, isLogged])
 
   return (
